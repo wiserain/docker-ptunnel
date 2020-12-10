@@ -46,6 +46,7 @@ EXPOSE 8008 21000
 VOLUME /config
 WORKDIR /config
 
-HEALTHCHECK --interval=10m --timeout=30s --start-period=10s --retries=3 CMD [ "/healthcheck.sh" ]  
+HEALTHCHECK --interval=10m --timeout=30s --start-period=10s --retries=3 \
+    CMD [ "/healthcheck.sh" ]  
 
 ENTRYPOINT ["/init"]
