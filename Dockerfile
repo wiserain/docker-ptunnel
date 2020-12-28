@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:3.12
 LABEL maintainer "wiserain"
 
 # This hack is widely applied to avoid python printing issues in docker containers.
