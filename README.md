@@ -48,6 +48,7 @@ As green-tunnel is binding to ```0.0.0.0:21000```, you can directly access it in
 | ```PROXY_USER``` / ```PROXY_PASS```  | required both to activate proxy authentication   |  |
 | ```PROXY_PORT```  | to run proxy in a different port  | ```8008``` |
 | ```PROXY_VERBOSE```  | simple access logging  |  |
+| ```PROXY_AUTHTIME```  | re-auth time interval for same ip (second in string format)  | ```2592000``` (30 days) |
 | ```GT_ENABLED```  | set ```false``` to disable green-tunnel  | ```true``` |
 | ```GT_UPDATE```  | set ```true``` to update green-tunnel on startup  | ```false``` |
 | ```GT_PORT```  | to run green-tunnel in different port  | ```21000```  |

@@ -11,6 +11,9 @@ if [ "$(printenv PROXY_ENABLED | tr -d '"' | tr -d "'")" == "true" ]; then
     if [ "$(printenv GT_ENABLED | tr -d '"' | tr -d "'")" == "true" ]; then
         command="$command -r http://127.0.0.1:${GT_PORT:-21000}"
     fi
+    if [[ "$(printenv PROXY_AUTHTIME | tr -d '"' | tr -d "'")" =~ ^[0-9]+$ ]]; then
+        command="$command --auth ${PROXY_AUTHTIME}"
+    fi
     command="$command${PROXY_VERBOSE+ -v}"
 
     echo "running => $command"
