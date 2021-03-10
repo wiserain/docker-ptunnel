@@ -1,5 +1,6 @@
 FROM ghcr.io/linuxserver/baseimage-alpine:3.13
-LABEL maintainer "wiserain"
+LABEL maintainer="wiserain"
+LABEL org.opencontainers.image.source https://github.com/wiserain/docker-ptunnel
 
 # This hack is widely applied to avoid python printing issues in docker containers.
 # See: https://github.com/Docker-Hub-frolvlad/docker-alpine-python3/pull/13
