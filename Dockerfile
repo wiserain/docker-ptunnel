@@ -1,16 +1,12 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.13
+FROM ghcr.io/linuxserver/baseimage-alpine:3.14
 LABEL maintainer="wiserain"
 LABEL org.opencontainers.image.source https://github.com/wiserain/docker-ptunnel
 
-# This hack is widely applied to avoid python printing issues in docker containers.
-# See: https://github.com/Docker-Hub-frolvlad/docker-alpine-python3/pull/13
-ENV PYTHONUNBUFFERED=1
-
-# default environment settings
-ENV TZ=Asia/Seoul
-ENV GT_ENABLED=true
-ENV GT_UPDATE=false
-ENV PROXY_ENABLED=true
+ENV PYTHONUNBUFFERED=1 \
+    TZ=Asia/Seoul \
+    GT_ENABLED=true \
+    GT_UPDATE=false \
+    PROXY_ENABLED=true
 
 RUN \
     echo "**** install frolvlad/alpine-python3 ****" && \
