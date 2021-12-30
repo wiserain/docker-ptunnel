@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.14
+FROM ghcr.io/linuxserver/baseimage-alpine:3.15
 LABEL maintainer="wiserain"
 LABEL org.opencontainers.image.source https://github.com/wiserain/docker-ptunnel
 
@@ -7,6 +7,9 @@ ENV PYTHONUNBUFFERED=1 \
     GT_ENABLED=true \
     GT_UPDATE=false \
     PROXY_ENABLED=true
+
+# add local files
+COPY root/ /
 
 RUN \
     echo "**** install frolvlad/alpine-python3 ****" && \
@@ -29,15 +32,12 @@ RUN \
     npm i -g green-tunnel && \
     echo "**** install others ****" && \
     apk add --no-cache ca-certificates bash curl && \
+    echo "**** permissions ****" && \
+    chmod a+x /healthcheck.sh && \
     echo "**** cleanup ****" && \
     rm -rf \
         /tmp/* \
         /root/.cache
-
-# add local files
-COPY root/ /
-
-RUN chmod a+x /healthcheck.sh
 
 EXPOSE 8008 21000
 VOLUME /config
