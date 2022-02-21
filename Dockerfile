@@ -2,7 +2,9 @@ FROM ghcr.io/linuxserver/baseimage-alpine:3.15
 LABEL maintainer="wiserain"
 LABEL org.opencontainers.image.source https://github.com/wiserain/docker-ptunnel
 
-ENV PYTHONUNBUFFERED=1 \
+ENV \
+    S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
+    PYTHONUNBUFFERED=1 \
     TZ=Asia/Seoul \
     GT_ENABLED=true \
     GT_UPDATE=false \

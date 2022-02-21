@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+
+if [ "$(printenv PROXY_ENABLED | tr -d '"' | tr -d "'")" == "true" ]; then
+    echo "** $(pproxy --version) ready!"
+else
+    # remove unused services
+    rm -rf /etc/services.d/pproxy
+fi
