@@ -2,18 +2,19 @@
 
 export HOME=/config
 
-if [ "$(printenv PROXY_ENABLED | tr -d '"' | tr -d "'")" == "true" ]; then
-
-    command="pproxy -l http://0.0.0.0:${PROXY_PORT:-8008}"
-    if [[ ! -z ${PROXY_USER} ]] && [[ ! -z ${PROXY_PASS} ]]; then
-        command="$command#${PROXY_USER}:${PROXY_PASS}"
-    fi
-    if [ "$(printenv GT_ENABLED | tr -d '"' | tr -d "'")" == "true" ]; then
-        command="$command -r http://127.0.0.1:${GT_PORT:-21000}"
-    fi
-    command="$command --auth ${PROXY_AUTHTIME:-0}${PROXY_VERBOSE+ -v}"
-
-    echo "running => $command"
-    exec s6-setuidgid abc $command
-
+if [ "${PROXY_ENABLED}" != "true" ]; then
+    s6-svc -d .
+    exit 0
 fi
+
+command="pproxy -l http://0.0.0.0:${PROXY_PORT:-8008}"
+if [[ -n ${PROXY_USER:-} ]] && [[ -n ${PROXY_PASS:-} ]]; then
+    command="$command#${PROXY_USER}:${PROXY_PASS}"
+fi
+if [ "${GT_ENABLED}" = "true" ]; then
+    command="$command -r http://127.0.0.1:${GT_PORT:-21000}"
+fi
+command="$command --auth ${PROXY_AUTHTIME:-0}${PROXY_VERBOSE+ -v}"
+
+echo "*** executing => $command"
+exec s6-setuidgid abc $command
