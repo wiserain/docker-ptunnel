@@ -1,4 +1,5 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.15
+ARG ALPINE_VER
+FROM ghcr.io/linuxserver/baseimage-alpine:${ALPINE_VER}
 LABEL maintainer="wiserain"
 LABEL org.opencontainers.image.source https://github.com/wiserain/docker-ptunnel
 
