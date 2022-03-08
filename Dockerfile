@@ -48,7 +48,6 @@ ENV \
     PYTHONUNBUFFERED=1 \
     TZ=Asia/Seoul \
     GT_ENABLED=true \
-    GT_UPDATE=false \
     PROXY_ENABLED=true
 
 COPY --from=builder /bar/ /

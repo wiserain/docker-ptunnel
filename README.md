@@ -50,7 +50,6 @@ As green-tunnel is binding to ```0.0.0.0:21000```, you can directly access it in
 | ```PROXY_VERBOSE```  | simple access logging  |  |
 | ```PROXY_AUTHTIME```  | re-auth time interval for same ip (second in string format)  | ```0``` |
 | ```GT_ENABLED```  | set ```false``` to disable green-tunnel  | ```true``` |
-| ```GT_UPDATE```  | set ```true``` to update green-tunnel on startup  | ```false``` |
 | ```GT_PORT```  | to run green-tunnel in different port  | ```21000```  |
 | ```GT_VERBOSE```  | set ```true``` to run green-tunnel in verbose mode for the purpose of debugging  |  |
 | ```GT_DNSTYPE```  | agrument ```--dns-type``` for [green-tunnel CLI](https://github.com/SadeghHayeri/GreenTunnel#command-line-interface-cli)  | ```https```  |
