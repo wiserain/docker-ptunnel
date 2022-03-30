@@ -58,13 +58,13 @@ jobs:
           echo ::set-output name=github_desc::$(curl -sX GET https://api.github.com/repos/${GITHUB_REPOSITORY} | jq -r .description)
       -
         name: Login to docker.io
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
         with:
           username: ${{ env.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASS }}
       -
         name: Login to ghcr.io
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -138,13 +138,15 @@ jobs:
             ALPINE_VER=${{ env.ALPINE_VER }}
       -
         name: Login to docker.io
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
+        if: github.actor == github.event.repository.owner.login
         with:
           username: ${{ env.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASS }}
       -
         name: Login to ghcr.io
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
+        if: github.actor == github.event.repository.owner.login
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -152,6 +154,7 @@ jobs:
       - 
         name: Buildx and Push
         uses: docker/build-push-action@v2
+        if: github.actor == github.event.repository.owner.login
         with:
           context: .
           file: Dockerfile
@@ -167,7 +170,7 @@ jobs:
       -
         name: Notification
         uses: sarisia/actions-status-discord@v1
-        if: always()
+        if: always() && github.actor == github.event.repository.owner.login
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
